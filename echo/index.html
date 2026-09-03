@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECHO — Your next line, on Even Realities G2</title>
+<meta name="description" content="ECHO is a language-practice app for Even Realities G2 smart glasses: live subtitles of what the other person said, a line you can say right now, and practice built from your own conversations.">
+<meta name="application-name" content="ECHO">
+<meta name="theme-color" content="#101016">
+<link rel="canonical" href="https://jk06095-lang.github.io/echo/">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<!-- Google Search Console 소유권 확인: "HTML 태그" 방식의 메타태그를 아래 줄에 넣는다.
+     예) <meta name="google-site-verification" content="…"> -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ECHO">
+<meta property="og:title" content="ECHO — Your next line, on Even Realities G2">
+<meta property="og:description" content="Your glasses listen to the conversation and put your next line in front of your eyes. Live subtitles, a line you can say right now, and practice built from your own conversations.">
+<meta property="og:url" content="https://jk06095-lang.github.io/echo/">
+<meta property="og:image" content="https://jk06095-lang.github.io/echo/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ECHO",
+  "applicationCategory": "EducationalApplication",
+  "applicationSubCategory": "Language learning",
+  "operatingSystem": "Even Realities G2 (via the Even app)",
+  "url": "https://jk06095-lang.github.io/echo/",
+  "description": "A language-practice app for Even Realities G2 smart glasses: live subtitles of what the other person said, a line you can say right now, and practice built from your own conversations.",
+  "inLanguage": ["ko", "en", "ja", "zh-Hans"],
+  "author": { "@type": "Person", "name": "jk06095", "email": "jk06095@gmail.com" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" }
+}
+</script>
+<style>
+  :root {
+    --bg: #101016;
+    --bg-2: #15151c;
+    --surface: rgba(38, 40, 52, 0.4);
+    --border: rgba(255, 255, 255, 0.1);
+    --row-line: rgba(255, 255, 255, 0.07);
+    --text: #ececee;
+    --muted: #a3a3ad;
+    --dim: #7c7c86;
+    --accent: #f6ec81;
+    --accent-ink: #ede58d;
+    --accent-text: #2a270f;
+    --lens: #46e646;
+    --lens-dim: #2f9a2f;
+    --card-sh: 0 10px 30px rgba(8, 8, 14, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Malgun Gothic",
+      "Noto Sans KR", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP",
+      "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background-image: radial-gradient(900px 520px at 85% -10%, rgba(246, 236, 129, 0.07), transparent 60%),
+      radial-gradient(700px 420px at -10% 40%, rgba(70, 230, 70, 0.04), transparent 60%);
+  }
+  [lang="ko"] { word-break: keep-all; }
+  a { color: inherit; }
+  img { max-width: 100%; height: auto; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--accent); color: var(--accent-text); padding: 8px 12px; border-radius: 8px; z-index: 20; }
+  .skip:focus { left: 8px; }
+
+  /* 언어 블록 — html[data-lang]이 있으면 하나만, 없으면(JS 없음) 넷 다 */
+  html[data-lang] .l10n { display: none; }
+  html[data-lang="en"] .l10n[data-lang="en"],
+  html[data-lang="ko"] .l10n[data-lang="ko"],
+  html[data-lang="ja"] .l10n[data-lang="ja"],
+  html[data-lang="zh"] .l10n[data-lang="zh"] { display: block; }
+  html:not([data-lang]) .l10n + .l10n { border-top: 6px solid var(--accent); margin-top: 40px; }
+
+  header.top { position: sticky; top: 0; z-index: 10; background: rgba(16, 16, 22, 0.74); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 12px; }
+  .mark { font-weight: 900; letter-spacing: 0.26em; font-size: 18px; text-decoration: none; }
+  .mark span { color: var(--accent); }
+  .langs { display: flex; gap: 2px; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
+  .langs button { appearance: none; border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 13px; line-height: 1; padding: 8px 12px; border-radius: 999px; cursor: pointer; }
+  .langs button:hover { color: var(--text); }
+  .langs button[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); font-weight: 600; }
+  .langs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .hero { padding: 76px 0 60px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.3em; color: var(--muted); text-transform: uppercase; margin: 0 0 18px; }
+  h1.big { font-size: clamp(64px, 10vw, 112px); font-weight: 900; letter-spacing: 0.02em; line-height: 0.95; margin: 0 0 22px; }
+  .rule { width: 150px; height: 6px; background: var(--accent); border-radius: 3px; margin: 0 0 28px; }
+  .tag { font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; line-height: 1.3; margin: 0 0 18px; letter-spacing: -0.01em; }
+  .tag em { font-style: normal; color: var(--accent); }
+  .lead { font-size: 17px; color: var(--muted); margin: 0 0 24px; max-width: 36em; }
+  .status { display: inline-flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px 6px 12px; margin: 0 0 26px; }
+  .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 15px; border: 1px solid var(--border); }
+  .btn.p { background: var(--accent); color: var(--accent-text); border-color: transparent; }
+  .btn.s { color: var(--text); background: rgba(255, 255, 255, 0.06); }
+  .btn:hover { filter: brightness(1.06); }
+
+  .glasses { display: block; width: 300px; max-width: 70%; margin: 0 auto 18px; opacity: 0.55; }
+  .lens { background: #0a0c0a; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 22px 26px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06); color: var(--lens); }
+  .lens .row { display: grid; grid-template-columns: 6em 1fr; gap: 14px; align-items: baseline; padding: 9px 0; }
+  .lens .row + .row { border-top: 1px solid rgba(70, 230, 70, 0.08); }
+  .lens .k { font-size: 11px; letter-spacing: 0.22em; color: var(--lens-dim); text-transform: uppercase; }
+  .lens .v { font-size: 19px; line-height: 1.35; text-shadow: 0 0 14px rgba(70, 230, 70, 0.35); }
+  .lens .v small { display: block; font-size: 13px; color: var(--lens-dim); margin-top: 2px; text-shadow: none; }
+  .lenscap { text-align: center; color: var(--dim); font-size: 14px; margin: 16px 0 0; }
+
+  section { padding: 64px 0; border-top: 1px solid var(--row-line); }
+  h2 { font-size: clamp(26px, 3vw, 34px); margin: 0 0 10px; letter-spacing: -0.01em; line-height: 1.25; }
+  .sub { color: var(--muted); margin: 0 0 32px; max-width: 42em; font-size: 17px; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: var(--card-sh); }
+  .card h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.35; }
+  .card p { margin: 0; color: var(--muted); }
+  .step .n { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: var(--accent-text); font-weight: 800; display: grid; place-items: center; margin-bottom: 14px; }
+  .loop { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 28px; font-size: 14px; }
+  .loop span { border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px; }
+  .loop b { color: var(--dim); font-weight: 400; }
+  .purpose { font-size: clamp(19px, 2.2vw, 23px); line-height: 1.55; max-width: 34em; margin: 0 0 8px; }
+  .purpose b { color: var(--accent-ink); font-weight: 700; }
+
+  .lensgrid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .lensgrid figure { margin: 0; }
+  .lensframe { background: #08090a; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 14px 16px; aspect-ratio: 2 / 1; display: flex; align-items: flex-start; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05); }
+  .lensframe img { width: 100%; display: block; }
+  figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+  .note { color: var(--dim); font-size: 13px; margin: 18px 0 0; }
+
+  .phones { display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr); }
+  .phones figure { margin: 0; }
+  .phones img { width: 100%; border-radius: 22px; border: 1px solid var(--border); display: block; background: #1d1d1f; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 24px; }
+  .chip { border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px; font-size: 14px; background: rgba(255, 255, 255, 0.04); }
+  .chip small { color: var(--dim); margin-left: 6px; font-size: 12px; }
+  .req { color: var(--muted); margin: 0; }
+  .req b { color: var(--text); }
+
+  .plist { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 12px; max-width: 48em; }
+  .plist li { padding-left: 28px; position: relative; color: var(--muted); }
+  .plist li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); opacity: 0.9; }
+  .plist li b { color: var(--text); }
+  .contact { display: flex; gap: 14px 36px; flex-wrap: wrap; color: var(--muted); margin: 0; }
+  .contact div b { display: block; color: var(--dim); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; margin-bottom: 2px; }
+  .contact a { color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+
+  footer { padding: 40px 0 64px; border-top: 1px solid var(--row-line); color: var(--dim); font-size: 13px; line-height: 1.7; }
+  footer .links { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 14px; }
+  footer a { color: var(--muted); }
+  footer p { margin: 0; max-width: 60em; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 48px; gap: 40px; }
+    .phones { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -24px; padding: 0 24px 10px; -webkit-overflow-scrolling: touch; }
+    .phones figure { flex: 0 0 220px; scroll-snap-align: start; }
+  }
+  @media (max-width: 520px) {
+    .langs button { padding: 8px 9px; font-size: 12px; }
+    .lens { padding: 18px; }
+    .lens .row { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+<script>
+  // 첫 페인트 전에 언어를 정한다 — 깜빡임을 막으려고 head에 둔다.
+  (function () {
+    var L = ['en', 'ko', 'ja', 'zh'];
+    var q = null;
+    try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+    var s = null;
+    try { s = localStorage.getItem('echo.lang'); } catch (e) {}
+    var n = ((navigator.language || 'en') + '').toLowerCase().slice(0, 2);
+    var l = L.indexOf(q) >= 0 ? q : (L.indexOf(s) >= 0 ? s : (L.indexOf(n) >= 0 ? n : 'en'));
+    document.documentElement.setAttribute('data-lang', l);
+    document.documentElement.lang = l === 'zh' ? 'zh-Hans' : l;
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="ECHO">ECH<span>O</span></a>
+    <nav class="langs" aria-label="Language">
+      <button type="button" data-set="en" lang="en">EN</button>
+      <button type="button" data-set="ko" lang="ko">한국어</button>
+      <button type="button" data-set="ja" lang="ja">日本語</button>
+      <button type="button" data-set="zh" lang="zh-Hans">中文</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<!-- ================================================================ EN -->
+<div class="l10n" data-lang="en" lang="en">
+  <div class="wrap">
+    <div class="hero" id="top">
+      <div>
+        <p class="eyebrow">For education · Even Realities G2</p>
+        <h1 class="big">ECHO</h1>
+        <div class="rule" aria-hidden="true"></div>
+        <p class="tag">Your glasses listen to the conversation — and put <em>your next line</em> in front of your eyes.</p>
+        <p class="lead">Freezing mid-sentence usually isn't a vocabulary problem — the moment is just too short. Echo listens through your glasses, shows a line you can actually say right now, and afterwards turns what wobbled into your next practice.</p>
+        <p class="status"><i aria-hidden="true"></i>Now in device testing · Even Hub release to follow</p>
+        <div class="cta">
+          <a class="btn p" href="#how-en">How it works</a>
+          <a class="btn s" href="https://jk06095-lang.github.io/echo-legal/en.html">Privacy policy</a>
+        </div>
+      </div>
+      <div>
+        <svg class="glasses" viewBox="0 0 300 70" aria-hidden="true" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round">
+          <rect x="18" y="14" width="112" height="46" rx="16"/><rect x="170" y="14" width="112" height="46" rx="16"/>
+          <path d="M130 30 q20 -14 40 0"/><path d="M18 26 l-12 -6"/><path d="M282 26 l12 -6"/>
+        </svg>
+        <div class="lens" role="img" aria-label="Example of what appears on the lens: what they said, a line to try, and what you said">
+          <div class="row"><span class="k">Listening</span><span class="v">어서 오세요, 주문 도와드릴까요?<small>Welcome — what can I get you?</small></span></div>
+          <div class="row"><span class="k">Try</span><span class="v">아이스 아메리카노 한 잔 주세요.<small>One iced americano, please.</small></span></div>
+          <div class="row"><span class="k">You</span><span class="v">아이스 아메리카노 한 잔 주세요.</span></div>
+        </div>
+        <p class="lenscap">What they said · what you could say · what you said — right on the lens.</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="what-en">
+    <div class="wrap">
+      <h2>What ECHO is</h2>
+      <p class="purpose"><b>ECHO</b> is a language-practice app for <b>Even Realities G2</b> smart glasses. It helps you get through a real conversation in a language you are still learning — and then turns that conversation into practice.</p>
+      <div class="loop" aria-label="The learning loop">
+        <span>Live conversation</span><b>→</b><span>Report</span><b>→</b><span>Practice with an AI partner</span><b>→</b><span>Next conversation</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-en">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <p class="sub">One pipeline, three moments — and nothing to tap during the conversation.</p>
+      <div class="grid">
+        <div class="card step"><div class="n">1</div><h3>They speak</h3><p>The glasses' microphones pick up what the other person says. A subtitle in your language appears on the lens, so you never have to look at your phone.</p></div>
+        <div class="card step"><div class="n">2</div><h3>You get a line</h3><p>Echo offers one line you can say right now — in the language you're learning, with the meaning in yours. Say it, and it is echoed back so you know it was heard.</p></div>
+        <div class="card step"><div class="n">3</div><h3>It becomes practice</h3><p>After the session, the phrases that didn't come out are collected and built into a new scenario you can rehearse with an AI partner — on the glasses or on the phone.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features-en">
+    <div class="wrap">
+      <h2>What you get</h2>
+      <div class="grid">
+        <div class="card"><h3>The next line, right in front of you</h3><p>During a real conversation, Echo shows what the other person said and offers a line you can use right now — on the glasses, so you never look at your phone.</p></div>
+        <div class="card"><h3>Free talk with an AI partner</h3><p>Unscripted conversation. If the connection drops, Echo reconnects and remembers what you were talking about.</p></div>
+        <div class="card"><h3>Practice — listening and shadowing</h3><p>Scenario-based drills with immediate feedback on pronunciation and phrasing.</p></div>
+        <div class="card"><h3>What wobbled becomes your next lesson</h3><p>After each session, Echo collects the phrases that didn't come out and builds a scenario around them.</p></div>
+        <div class="card"><h3>It knows your voice</h3><p>One six-second reading is enough to separate your lines from theirs. Voice data stays on your device, and you can delete it at any time.</p></div>
+        <div class="card"><h3>Your language, and the one you're learning</h3><p>Use Echo in Korean, Japanese, or Chinese to learn English — or use it in English to learn Korean, Japanese, or Chinese. Choose once on first run and everything follows.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lens-en">
+    <div class="wrap">
+      <h2>On the lens</h2>
+      <p class="sub">The glasses show a few short lines in green — that is all you need during a conversation.</p>
+      <div class="lensgrid">
+        <figure><div class="lensframe"><img src="./assets/lens-live.png" width="576" height="288" alt="Lens capture: LISTENING, the other person's line in Korean, a suggested reply marked with an arrow, and the line you said marked 'you:'"></div><figcaption>Live conversation — what they said, a line to try, and what you said.</figcaption></figure>
+        <figure><div class="lensframe"><img src="./assets/lens-free-talk.png" width="576" height="288" alt="Lens capture: the AI partner Jamie asks a question in Korean, with its English meaning below"></div><figcaption>Free talk with an AI partner (Jamie) — a question in the language you're learning, with the meaning in yours.</figcaption></figure>
+        <figure><div class="lensframe"><img src="./assets/lens-quick-menu.png" width="576" height="288" alt="Lens capture: the quick menu listing Live Talk, AI Chat and Listening, with 'Scroll · Tap = Pick · Double-tap = Close'"></div><figcaption>Quick menu — Live Talk, AI Chat and Listening, right on the lens.</figcaption></figure>
+      </div>
+      <p class="note">Frames are the app's own lens output (576 × 288 px), captured in the Even simulator. Korean shown as the language being learned.</p>
+    </div>
+  </section>
+
+  <section id="phone-en">
+    <div class="wrap">
+      <h2>On your phone</h2>
+      <p class="sub">The phone is for choosing and looking back. During a conversation, it stays in your pocket.</p>
+      <div class="phones">
+        <figure><img src="./assets/phone-home.jpg" width="780" height="1688" alt="Phone screen: Home with Today's Balance — Listening, Today's Speaking Course, AI Free Talk"><figcaption>Home — today's balance of listening, speaking and free talk.</figcaption></figure>
+        <figure><img src="./assets/phone-practice.jpg" width="780" height="1688" alt="Phone screen: Speaking Practice with course progress and a curriculum of scenarios"><figcaption>Speaking practice — a curriculum of scenarios, one step at a time.</figcaption></figure>
+        <figure><img src="./assets/phone-languages.jpg" width="780" height="1688" alt="Phone screen: Which language do you speak, and which one are you learning?"><figcaption>Choose your languages — the one you speak and the one you're learning.</figcaption></figure>
+        <figure><img src="./assets/phone-voice.jpg" width="780" height="1688" alt="Phone screen: My Voice — register your voice with a six-second reading"><figcaption>My voice — a six-second reading to tell your voice from theirs.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="langs-en">
+    <div class="wrap">
+      <h2>Languages &amp; requirements</h2>
+      <p class="sub">Use Echo in Korean, Japanese, or Chinese to learn English — or use it in English to learn Korean, Japanese, or Chinese.</p>
+      <div class="chips" aria-label="App languages">
+        <span class="chip">한국어</span><span class="chip">English</span><span class="chip">日本語<small>beta</small></span><span class="chip">中文（简体）<small>beta</small></span>
+      </div>
+      <p class="req"><b>Requires</b> — Even Realities G2 · Even app 2.2.6 or later · internet connection. Japanese and Chinese are marked beta until native-speaker review is complete.</p>
+    </div>
+  </section>
+
+  <section id="privacy-en">
+    <div class="wrap">
+      <h2>Your data, in short</h2>
+      <p class="sub">Everything on this page can be read without signing in. Here is what Echo does with your data — the full policy is one click away.</p>
+      <ul class="plist">
+        <li><b>Audio is never stored.</b> Only the recognized text remains. During recognition, audio is sent to speech-recognition providers — the policy lists each one.</li>
+        <li><b>The data used to recognize your voice stays on your device.</b> Delete it any time in Me → My Voice.</li>
+        <li><b>Conversation text and learning records are tied to your account</b> so you can look back. Delete them all in Me → Data.</li>
+        <li><b>Live conversation picks up nearby speech.</b> Tell the people you're talking with and get their consent before turning it on.</li>
+        <li><b>Signing in with Google is optional.</b> It lets your records follow you to a new device. Echo receives only your email address from Google and uses it to identify your account — nothing else is read from your Google account.</li>
+      </ul>
+      <a class="btn s" href="https://jk06095-lang.github.io/echo-legal/en.html">Read the full privacy policy →</a>
+    </div>
+  </section>
+
+  <section id="contact-en">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p class="sub">ECHO is built by an independent developer in Korea.</p>
+      <div class="contact">
+        <div><b>Email</b><a href="mailto:jk06095@gmail.com">jk06095@gmail.com</a></div>
+        <div><b>GitHub</b><a href="https://github.com/jk06095-lang">github.com/jk06095-lang</a></div>
+        <div><b>Privacy policy</b><a href="https://jk06095-lang.github.io/echo-legal/">jk06095-lang.github.io/echo-legal</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="links"><a href="https://jk06095-lang.github.io/echo-legal/">Privacy Policy</a><a href="mailto:jk06095@gmail.com">Contact</a><a href="#top">Top</a></div>
+      <p>© 2026 ECHO · jk06095. Even Realities and G2 are trademarks of their respective owner. ECHO is an independent third-party app and is not affiliated with or endorsed by Even Realities.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ================================================================ KO -->
+<div class="l10n" data-lang="ko" lang="ko">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">For education · Even Realities G2</p>
+        <h1 class="big">ECHO</h1>
+        <div class="rule" aria-hidden="true"></div>
+        <p class="tag">안경이 대화를 듣고, <em>다음 한 마디</em>를 눈앞에 띄워줍니다.</p>
+        <p class="lead">말이 안 나오는 건 몰라서가 아니라 그 순간이 너무 짧아서입니다. 에코는 안경으로 대화를 들으며 지금 쓸 수 있는 표현을 자막으로 띄워주고, 끝나면 무엇이 흔들렸는지 정리해 다음 연습으로 이어줍니다.</p>
+        <p class="status"><i aria-hidden="true"></i>실기기 테스트 중 · Even Hub 출시 예정</p>
+        <div class="cta">
+          <a class="btn p" href="#how-ko">어떻게 동작하나</a>
+          <a class="btn s" href="https://jk06095-lang.github.io/echo-legal/ko.html">개인정보처리방침</a>
+        </div>
+      </div>
+      <div>
+        <svg class="glasses" viewBox="0 0 300 70" aria-hidden="true" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round">
+          <rect x="18" y="14" width="112" height="46" rx="16"/><rect x="170" y="14" width="112" height="46" rx="16"/>
+          <path d="M130 30 q20 -14 40 0"/><path d="M18 26 l-12 -6"/><path d="M282 26 l12 -6"/>
+        </svg>
+        <div class="lens" role="img" aria-label="렌즈에 뜨는 화면 예시: 상대가 한 말, 해볼 만한 한 마디, 내가 한 말">
+          <div class="row"><span class="k">Listening</span><span class="v">Hi! What can I get for you?<small>어서 오세요, 주문 도와드릴까요?</small></span></div>
+          <div class="row"><span class="k">Try</span><span class="v">Can I get an iced americano?<small>아이스 아메리카노 한 잔 주세요.</small></span></div>
+          <div class="row"><span class="k">You</span><span class="v">Can I get an iced americano?</span></div>
+        </div>
+        <p class="lenscap">상대가 한 말 · 지금 할 수 있는 말 · 내가 한 말 — 렌즈 위에 바로.</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="what-ko">
+    <div class="wrap">
+      <h2>ECHO는 무엇인가</h2>
+      <p class="purpose"><b>ECHO</b>는 <b>Even Realities G2</b> 스마트 안경용 외국어 회화 연습 앱입니다. 아직 배우는 중인 언어로 실제 대화가 굴러가게 돕고, 그 대화를 다시 연습으로 돌려줍니다.</p>
+      <div class="loop" aria-label="학습 순환">
+        <span>실전 대화</span><b>→</b><span>리포트</span><b>→</b><span>AI 파트너와 연습</span><b>→</b><span>다음 대화</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-ko">
+    <div class="wrap">
+      <h2>어떻게 동작하나</h2>
+      <p class="sub">하나의 흐름, 세 장면 — 대화 중에 누를 것은 없습니다.</p>
+      <div class="grid">
+        <div class="card step"><div class="n">1</div><h3>상대가 말하면</h3><p>안경 마이크가 상대의 말을 듣고, 내 언어 자막이 렌즈에 뜹니다. 폰을 볼 필요가 없습니다.</p></div>
+        <div class="card step"><div class="n">2</div><h3>다음 한 마디</h3><p>지금 쓸 수 있는 표현 하나를 배우는 언어로 크게, 내 언어 뜻을 작게 띄웁니다. 말하면 인식된 내용이 그대로 되돌아와 "제대로 들렸구나"를 알 수 있습니다.</p></div>
+        <div class="card step"><div class="n">3</div><h3>연습이 됩니다</h3><p>대화가 끝나면 안 나왔던 표현이 정리되고, 그 표현으로 AI 파트너와 연습할 시나리오가 만들어집니다 — 안경에서도, 폰에서도.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features-ko">
+    <div class="wrap">
+      <h2>무엇을 할 수 있나</h2>
+      <div class="grid">
+        <div class="card"><h3>눈앞에 뜨는 다음 한 마디</h3><p>실전 대화 중 상대의 말을 안경 자막으로 보여주고, 지금 쓸 수 있는 표현을 함께 띄웁니다. 폰을 볼 필요가 없습니다.</p></div>
+        <div class="card"><h3>AI 파트너와 진짜 수다</h3><p>대본 없는 자유 대화. 끊기면 알아서 다시 이어지고, 앞의 대화를 기억합니다.</p></div>
+        <div class="card"><h3>연습 — 듣기와 쉐도잉</h3><p>상황별 시나리오로 듣고 따라 말하며, 발음과 표현을 즉시 확인합니다.</p></div>
+        <div class="card"><h3>흔들린 표현이 다음 연습이 됩니다</h3><p>대화가 끝나면 무엇이 안 나왔는지 정리되고, 그 표현으로 맞춤 시나리오가 만들어집니다.</p></div>
+        <div class="card"><h3>내 목소리를 구분합니다</h3><p>6초 낭독 한 번이면 내 말과 상대 말을 갈라 기록합니다. 목소리 데이터는 이 기기에만 있고 언제든 지울 수 있습니다.</p></div>
+        <div class="card"><h3>쓰는 말과 배우는 말을 고릅니다</h3><p>한국어·일본어·중국어로 쓰면 영어를 배우고, 영어로 쓰면 한국어·일본어·중국어 중 하나를 배웁니다. 첫 실행에서 한 번 고르면 안내도 대화도 그 언어로 맞춰집니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lens-ko">
+    <div class="wrap">
+      <h2>렌즈 위에서</h2>
+      <p class="sub">안경에는 초록 글자 몇 줄만 뜹니다 — 대화 중에 필요한 건 그게 전부입니다.</p>
+      <div class="lensgrid">
+        <figure><div class="lensframe"><img src="./assets/lens-live.png" width="576" height="288" alt="렌즈 캡처: LISTENING, 상대의 말, 화살표로 표시된 추천 문장, 'you:'로 표시된 내가 한 말"></div><figcaption>실전 대화 — 상대의 말, 해볼 만한 한 마디, 내가 한 말.</figcaption></figure>
+        <figure><div class="lensframe"><img src="./assets/lens-free-talk.png" width="576" height="288" alt="렌즈 캡처: AI 파트너 Jamie가 한국어로 묻고, 아래에 영어 뜻이 있다"></div><figcaption>AI 파트너(Jamie)와 프리토크 — 배우는 언어의 질문과 내 언어의 뜻.</figcaption></figure>
+        <figure><div class="lensframe"><img src="./assets/lens-quick-menu.png" width="576" height="288" alt="렌즈 캡처: Live Talk, AI Chat, Listening이 있는 퀵메뉴와 'Scroll · Tap = Pick · Double-tap = Close' 안내"></div><figcaption>퀵메뉴 — Live Talk · AI Chat · Listening을 렌즈에서 바로.</figcaption></figure>
+      </div>
+      <p class="note">이븐 시뮬레이터에서 앱이 실제로 렌즈에 그린 화면(576 × 288 px)입니다. 배우는 언어가 한국어인 경우의 예시입니다.</p>
+    </div>
+  </section>
+
+  <section id="phone-ko">
+    <div class="wrap">
+      <h2>폰에서</h2>
+      <p class="sub">폰은 고르고 돌아보는 곳입니다. 대화 중에는 주머니에 있습니다.</p>
+      <div class="phones">
+        <figure><img src="./assets/phone-home.jpg" width="780" height="1688" alt="폰 화면: 홈의 오늘의 균형 — 듣기, 오늘의 말하기 코스, AI 프리토크"><figcaption>홈 — 듣기·말하기·프리토크의 오늘 균형.</figcaption></figure>
+        <figure><img src="./assets/phone-practice.jpg" width="780" height="1688" alt="폰 화면: 말하기 연습의 코스 진행과 시나리오 커리큘럼"><figcaption>말하기 연습 — 시나리오 커리큘럼을 한 걸음씩.</figcaption></figure>
+        <figure><img src="./assets/phone-languages.jpg" width="780" height="1688" alt="폰 화면: 어떤 언어를 쓰고, 어떤 언어를 배우나요?"><figcaption>언어 선택 — 쓰는 말과 배우는 말.</figcaption></figure>
+        <figure><img src="./assets/phone-voice.jpg" width="780" height="1688" alt="폰 화면: 내 목소리 — 6초 낭독으로 목소리 등록"><figcaption>내 목소리 — 6초 낭독으로 내 말과 상대 말을 구분.</figcaption></figure>
+      </div>
+      <p class="note">폰 화면은 영어 UI입니다.</p>
+    </div>
+  </section>
+
+  <section id="langs-ko">
+    <div class="wrap">
+      <h2>언어와 필요한 것</h2>
+      <p class="sub">한국어·일본어·중국어로 쓰면 영어를 배우고, 영어로 쓰면 한국어·일본어·중국어 중 하나를 배웁니다.</p>
+      <div class="chips" aria-label="앱 언어">
+        <span class="chip">한국어</span><span class="chip">English</span><span class="chip">日本語<small>베타</small></span><span class="chip">中文（简体）<small>베타</small></span>
+      </div>
+      <p class="req"><b>필요한 것</b> — Even Realities G2 · 이븐 앱 2.2.6 이상 · 인터넷 연결. 일본어·중국어는 원어민 검수 전이라 베타로 표시합니다.</p>
+    </div>
+  </section>
+
+  <section id="privacy-ko">
+    <div class="wrap">
+      <h2>내 데이터, 짧게</h2>
+      <p class="sub">이 페이지는 로그인 없이 읽을 수 있습니다. 에코가 데이터를 어떻게 다루는지 요약했고, 전문은 한 번 눌러 볼 수 있습니다.</p>
+      <ul class="plist">
+        <li><b>녹음 파일은 저장하지 않습니다.</b> 인식된 텍스트만 남습니다. 인식 과정에서 음성은 음성 인식 업체로 전송되며, 방침에 업체가 하나씩 적혀 있습니다.</li>
+        <li><b>내 목소리를 알아보기 위한 데이터는 이 기기에만 있습니다.</b> 나 → 내 목소리에서 언제든 지울 수 있습니다.</li>
+        <li><b>대화 텍스트와 학습 기록은 돌아볼 수 있도록 계정에 묶여 저장됩니다.</b> 나 → 데이터에서 전부 지울 수 있습니다.</li>
+        <li><b>실전 대화는 주변 사람의 말을 인식합니다.</b> 켜기 전에 상대방에게 알리고 동의를 받아주세요.</li>
+        <li><b>Google 로그인은 선택입니다.</b> 기기를 바꿔도 기록이 이어지게 해줍니다. 에코가 Google에서 받는 것은 이메일 주소뿐이고 계정 식별에만 씁니다. Google 계정의 다른 정보는 읽지 않습니다.</li>
+      </ul>
+      <a class="btn s" href="https://jk06095-lang.github.io/echo-legal/ko.html">개인정보처리방침 전문 보기 →</a>
+    </div>
+  </section>
+
+  <section id="contact-ko">
+    <div class="wrap">
+      <h2>문의</h2>
+      <p class="sub">ECHO는 한국의 1인 개발자가 만듭니다.</p>
+      <div class="contact">
+        <div><b>이메일</b><a href="mailto:jk06095@gmail.com">jk06095@gmail.com</a></div>
+        <div><b>GitHub</b><a href="https://github.com/jk06095-lang">github.com/jk06095-lang</a></div>
+        <div><b>개인정보처리방침</b><a href="https://jk06095-lang.github.io/echo-legal/">jk06095-lang.github.io/echo-legal</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="links"><a href="https://jk06095-lang.github.io/echo-legal/">개인정보처리방침</a><a href="mailto:jk06095@gmail.com">문의</a><a href="#top">맨 위로</a></div>
+      <p>© 2026 ECHO · jk06095. Even Realities와 G2는 해당 소유자의 상표입니다. ECHO는 독립 개발된 서드파티 앱으로, Even Realities와 제휴·승인 관계가 없습니다.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ================================================================ JA -->
+<div class="l10n" data-lang="ja" lang="ja">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">For education · Even Realities G2</p>
+        <h1 class="big">ECHO</h1>
+        <div class="rule" aria-hidden="true"></div>
+        <p class="tag">メガネが会話を聞き取り、<em>次のひと言</em>を目の前に映します。</p>
+        <p class="lead">言葉が出てこないのは知らないからではなく、その一瞬が短すぎるからです。エコーはメガネで会話を聞き取り、いますぐ使えるひと言を字幕で映し、終わったあとは詰まったところを次の練習につなげます。</p>
+        <p class="status"><i aria-hidden="true"></i>実機テスト中 · Even Hub で公開予定</p>
+        <div class="cta">
+          <a class="btn p" href="#how-ja">仕組みを見る</a>
+          <a class="btn s" href="https://jk06095-lang.github.io/echo-legal/ja.html">プライバシーポリシー</a>
+        </div>
+      </div>
+      <div>
+        <svg class="glasses" viewBox="0 0 300 70" aria-hidden="true" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round">
+          <rect x="18" y="14" width="112" height="46" rx="16"/><rect x="170" y="14" width="112" height="46" rx="16"/>
+          <path d="M130 30 q20 -14 40 0"/><path d="M18 26 l-12 -6"/><path d="M282 26 l12 -6"/>
+        </svg>
+        <div class="lens" role="img" aria-label="レンズに映る画面の例：相手の言葉、試せるひと言、自分が言った言葉">
+          <div class="row"><span class="k">Listening</span><span class="v">Hi! What can I get for you?<small>いらっしゃいませ、ご注文は？</small></span></div>
+          <div class="row"><span class="k">Try</span><span class="v">Can I get an iced americano?<small>アイスアメリカーノをひとつください。</small></span></div>
+          <div class="row"><span class="k">You</span><span class="v">Can I get an iced americano?</span></div>
+        </div>
+        <p class="lenscap">相手の言葉 · いま言えるひと言 · 自分が言った言葉 — レンズの上に。</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="what-ja">
+    <div class="wrap">
+      <h2>ECHO とは</h2>
+      <p class="purpose"><b>ECHO</b> は <b>Even Realities G2</b> スマートグラス向けの語学会話練習アプリです。まだ学習中の言語での実際の会話を前に進める手助けをし、その会話を練習に変えます。</p>
+      <div class="loop" aria-label="学習のサイクル">
+        <span>実戦会話</span><b>→</b><span>レポート</span><b>→</b><span>AI パートナーと練習</span><b>→</b><span>次の会話</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-ja">
+    <div class="wrap">
+      <h2>仕組み</h2>
+      <p class="sub">ひとつの流れ、三つの場面 — 会話中に押すものはありません。</p>
+      <div class="grid">
+        <div class="card step"><div class="n">1</div><h3>相手が話すと</h3><p>メガネのマイクが相手の言葉を聞き取り、あなたの言語の字幕がレンズに映ります。スマホを見る必要はありません。</p></div>
+        <div class="card step"><div class="n">2</div><h3>次のひと言</h3><p>いま使える表現をひとつ、学習中の言語で大きく、あなたの言語の意味を小さく映します。話すと認識された内容がそのまま返ってきて、「ちゃんと聞こえた」とわかります。</p></div>
+        <div class="card step"><div class="n">3</div><h3>練習になります</h3><p>会話が終わると出てこなかった表現が整理され、それを使って AI パートナーと練習するシナリオが作られます — メガネでも、スマホでも。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features-ja">
+    <div class="wrap">
+      <h2>できること</h2>
+      <div class="grid">
+        <div class="card"><h3>次のひと言が、目の前に</h3><p>実際の会話中、相手の言葉をメガネに字幕で表示し、いま使えるひと言を一緒に映します。スマホを見る必要がありません。</p></div>
+        <div class="card"><h3>AIパートナーと本当の雑談</h3><p>台本なしの自由な会話。切れても自動でつなぎ直し、前の話を覚えています。</p></div>
+        <div class="card"><h3>練習 — 聞き取りとシャドーイング</h3><p>場面別のシナリオで聞いて話し、発音と表現をその場で確認します。</p></div>
+        <div class="card"><h3>詰まった表現が次の練習になります</h3><p>会話が終わると出てこなかった言葉が整理され、それを使ったシナリオが作られます。</p></div>
+        <div class="card"><h3>あなたの声を聞き分けます</h3><p>6秒の音読ひとつで、自分の言葉と相手の言葉を分けて記録します。声のデータはこの端末の中だけにあり、いつでも消せます。</p></div>
+        <div class="card"><h3>使う言語と、学ぶ言語を選べます</h3><p>日本語・韓国語・中国語で使えば英語を学び、英語で使えば日本語・韓国語・中国語のどれかを学びます。初回に一度選べば、案内も会話もその言語に合わせて動きます。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lens-ja">
+    <div class="wrap">
+      <h2>レンズの上で</h2>
+      <p class="sub">メガネには緑の文字が数行だけ映ります — 会話中に必要なのはそれだけです。</p>
+      <div class="lensgrid">
+        <figure><div class="lensframe"><img src="./assets/lens-live.png" width="576" height="288" alt="レンズのキャプチャ：LISTENING、相手の言葉、矢印付きのおすすめ文、'you:' 付きの自分が言った言葉"></div><figcaption>実戦会話 — 相手の言葉、試せるひと言、自分が言った言葉。</figcaption></figure>
+        <figure><div class="lensframe"><img src="./assets/lens-free-talk.png" width="576" height="288" alt="レンズのキャプチャ：AI パートナー Jamie が韓国語で質問し、下に英語の意味がある"></div><figcaption>AI パートナー（Jamie）とフリートーク — 学習中の言語の質問と、あなたの言語の意味。</figcaption></figure>
+        <figure><div class="lensframe"><img src="./assets/lens-quick-menu.png" width="576" height="288" alt="レンズのキャプチャ：Live Talk、AI Chat、Listening のクイックメニューと 'Scroll · Tap = Pick · Double-tap = Close' の案内"></div><figcaption>クイックメニュー — Live Talk · AI Chat · Listening をレンズで。</figcaption></figure>
+      </div>
+      <p class="note">Even シミュレーターでアプリが実際にレンズに描いた画面（576 × 288 px）です。学習中の言語が韓国語の場合の例です。</p>
+    </div>
+  </section>
+
+  <section id="phone-ja">
+    <div class="wrap">
+      <h2>スマホで</h2>
+      <p class="sub">スマホは選ぶところ、振り返るところです。会話中はポケットの中にあります。</p>
+      <div class="phones">
+        <figure><img src="./assets/phone-home.jpg" width="780" height="1688" alt="スマホ画面：ホームの今日のバランス — リスニング、今日のスピーキングコース、AI フリートーク"><figcaption>ホーム — 聞き取り・スピーキング・フリートークの今日のバランス。</figcaption></figure>
+        <figure><img src="./assets/phone-practice.jpg" width="780" height="1688" alt="スマホ画面：スピーキング練習のコース進捗とシナリオのカリキュラム"><figcaption>スピーキング練習 — シナリオのカリキュラムを一歩ずつ。</figcaption></figure>
+        <figure><img src="./assets/phone-languages.jpg" width="780" height="1688" alt="スマホ画面：どの言語を話し、どの言語を学んでいますか？"><figcaption>言語の選択 — 使う言語と学ぶ言語。</figcaption></figure>
+        <figure><img src="./assets/phone-voice.jpg" width="780" height="1688" alt="スマホ画面：わたしの声 — 6秒の音読で声を登録"><figcaption>わたしの声 — 6秒の音読で自分と相手の声を聞き分ける。</figcaption></figure>
+      </div>
+      <p class="note">スマホ画面は英語 UI です。</p>
+    </div>
+  </section>
+
+  <section id="langs-ja">
+    <div class="wrap">
+      <h2>言語と必要なもの</h2>
+      <p class="sub">日本語・韓国語・中国語で使えば英語を学び、英語で使えば日本語・韓国語・中国語のどれかを学びます。</p>
+      <div class="chips" aria-label="アプリの言語">
+        <span class="chip">한국어</span><span class="chip">English</span><span class="chip">日本語<small>ベータ</small></span><span class="chip">中文（简体）<small>ベータ</small></span>
+      </div>
+      <p class="req"><b>必要なもの</b> — Even Realities G2 · Even アプリ 2.2.6 以上 · インターネット接続。日本語と中国語はネイティブ校閲前のため、ベータと表示しています。</p>
+    </div>
+  </section>
+
+  <section id="privacy-ja">
+    <div class="wrap">
+      <h2>あなたのデータ、手短に</h2>
+      <p class="sub">このページはログインなしで読めます。エコーがデータをどう扱うかの要約です — 全文はワンクリック先にあります。</p>
+      <ul class="plist">
+        <li><b>録音ファイルは保存しません。</b> 認識されたテキストだけが残ります。認識の過程で音声は音声認識事業者に送信され、ポリシーに事業者を一つずつ記載しています。</li>
+        <li><b>あなたの声を聞き分けるためのデータはこの端末の中だけにあります。</b> わたし → わたしの声 からいつでも消せます。</li>
+        <li><b>会話のテキストと学習記録は、あとで振り返れるようアカウントに紐づけて保存します。</b> わたし → データ からすべて消せます。</li>
+        <li><b>実戦会話は周囲の人の発話を認識します。</b> 使う前に相手に伝え、同意を得てください。</li>
+        <li><b>Google ログインは任意です。</b> 端末を変えても記録が引き継がれます。エコーが Google から受け取るのはメールアドレスだけで、アカウントの識別にのみ使います。Google アカウントの他の情報は読み取りません。</li>
+      </ul>
+      <a class="btn s" href="https://jk06095-lang.github.io/echo-legal/ja.html">プライバシーポリシー全文を読む →</a>
+    </div>
+  </section>
+
+  <section id="contact-ja">
+    <div class="wrap">
+      <h2>お問い合わせ</h2>
+      <p class="sub">ECHO は韓国の個人開発者が作っています。</p>
+      <div class="contact">
+        <div><b>メール</b><a href="mailto:jk06095@gmail.com">jk06095@gmail.com</a></div>
+        <div><b>GitHub</b><a href="https://github.com/jk06095-lang">github.com/jk06095-lang</a></div>
+        <div><b>プライバシーポリシー</b><a href="https://jk06095-lang.github.io/echo-legal/">jk06095-lang.github.io/echo-legal</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="links"><a href="https://jk06095-lang.github.io/echo-legal/">プライバシーポリシー</a><a href="mailto:jk06095@gmail.com">お問い合わせ</a><a href="#top">トップへ</a></div>
+      <p>© 2026 ECHO · jk06095. Even Realities および G2 は各所有者の商標です。ECHO は独立したサードパーティ製アプリで、Even Realities との提携・承認関係はありません。</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ================================================================ ZH -->
+<div class="l10n" data-lang="zh" lang="zh-Hans">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">For education · Even Realities G2</p>
+        <h1 class="big">ECHO</h1>
+        <div class="rule" aria-hidden="true"></div>
+        <p class="tag">眼镜听着对话，把你<em>下一句话</em>送到眼前。</p>
+        <p class="lead">话说不出来，往往不是因为不会，而是那一瞬间太短。Echo 通过眼镜听对话，把你现在就能用的一句话显示出来，结束后再把卡住的地方整理成下一次练习。</p>
+        <p class="status"><i aria-hidden="true"></i>真机测试中 · 即将在 Even Hub 上架</p>
+        <div class="cta">
+          <a class="btn p" href="#how-zh">看看怎么用</a>
+          <a class="btn s" href="https://jk06095-lang.github.io/echo-legal/zh.html">隐私政策</a>
+        </div>
+      </div>
+      <div>
+        <svg class="glasses" viewBox="0 0 300 70" aria-hidden="true" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round">
+          <rect x="18" y="14" width="112" height="46" rx="16"/><rect x="170" y="14" width="112" height="46" rx="16"/>
+          <path d="M130 30 q20 -14 40 0"/><path d="M18 26 l-12 -6"/><path d="M282 26 l12 -6"/>
+        </svg>
+        <div class="lens" role="img" aria-label="镜片上显示的示例：对方说的、可以试着说的、你说出的">
+          <div class="row"><span class="k">Listening</span><span class="v">Hi! What can I get for you?<small>欢迎光临，想点什么？</small></span></div>
+          <div class="row"><span class="k">Try</span><span class="v">Can I get an iced americano?<small>请给我一杯冰美式。</small></span></div>
+          <div class="row"><span class="k">You</span><span class="v">Can I get an iced americano?</span></div>
+        </div>
+        <p class="lenscap">对方说的 · 你可以说的 · 你说出的 — 就在镜片上。</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="what-zh">
+    <div class="wrap">
+      <h2>ECHO 是什么</h2>
+      <p class="purpose"><b>ECHO</b> 是一款面向 <b>Even Realities G2</b> 智能眼镜的外语口语练习应用。它帮你用还在学的语言把真实对话进行下去，再把这些对话变成练习。</p>
+      <div class="loop" aria-label="学习循环">
+        <span>实战对话</span><b>→</b><span>报告</span><b>→</b><span>和 AI 伙伴练习</span><b>→</b><span>下一次对话</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-zh">
+    <div class="wrap">
+      <h2>怎么用</h2>
+      <p class="sub">一条流程，三个时刻 — 对话中不需要按任何东西。</p>
+      <div class="grid">
+        <div class="card step"><div class="n">1</div><h3>对方开口</h3><p>眼镜的麦克风听到对方的话，你的语言的字幕出现在镜片上。不用低头看手机。</p></div>
+        <div class="card step"><div class="n">2</div><h3>下一句话</h3><p>Echo 给出一句你现在就能用的话：学习语言的原句放大，你的语言的意思缩小显示。你说出后，识别到的内容会回显出来，让你知道"听到了"。</p></div>
+        <div class="card step"><div class="n">3</div><h3>变成练习</h3><p>对话结束后，没说出口的表达会被整理出来，并据此生成和 AI 伙伴练习的场景 — 在眼镜上，也在手机上。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features-zh">
+    <div class="wrap">
+      <h2>能做什么</h2>
+      <div class="grid">
+        <div class="card"><h3>下一句话，就在眼前</h3><p>真实对话中，Echo 把对方的话以字幕显示在镜片上，并给出你现在就能用的一句话。不用低头看手机。</p></div>
+        <div class="card"><h3>和 AI 伙伴真正地聊</h3><p>没有剧本的自由对话。断了会自动接上，并且记得刚才聊过什么。</p></div>
+        <div class="card"><h3>练习 — 听力和跟读</h3><p>按场景的练习，发音和表达当场就有反馈。</p></div>
+        <div class="card"><h3>卡住的表达会变成下一次练习</h3><p>一段对话结束后，没说出口的表达会被整理出来，并据此生成新的场景。</p></div>
+        <div class="card"><h3>它能分辨你的声音</h3><p>一次 6 秒朗读，就能把你说的话和对方说的话分开记录。声音数据只保存在这台设备上，随时可以删除。</p></div>
+        <div class="card"><h3>选择你说的语言和要学的语言</h3><p>用中文、韩语或日语使用就学英语；用英语使用就在中文、韩语、日语里选一个学。首次启动时选一次，之后的引导和对话都会跟着走。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lens-zh">
+    <div class="wrap">
+      <h2>在镜片上</h2>
+      <p class="sub">眼镜上只显示几行绿色文字 — 对话中需要的就这些。</p>
+      <div class="lensgrid">
+        <figure><div class="lensframe"><img src="./assets/lens-live.png" width="576" height="288" alt="镜片截图：LISTENING、对方的话、带箭头的推荐句，以及标有 'you:' 的你说出的话"></div><figcaption>实战对话 — 对方说的、可以试着说的、你说出的。</figcaption></figure>
+        <figure><div class="lensframe"><img src="./assets/lens-free-talk.png" width="576" height="288" alt="镜片截图：AI 伙伴 Jamie 用韩语提问，下面是英文意思"></div><figcaption>和 AI 伙伴（Jamie）自由对话 — 学习语言的提问和你的语言的意思。</figcaption></figure>
+        <figure><div class="lensframe"><img src="./assets/lens-quick-menu.png" width="576" height="288" alt="镜片截图：包含 Live Talk、AI Chat、Listening 的快捷菜单，以及 'Scroll · Tap = Pick · Double-tap = Close' 提示"></div><figcaption>快捷菜单 — Live Talk · AI Chat · Listening 就在镜片上。</figcaption></figure>
+      </div>
+      <p class="note">这是应用在 Even 模拟器中实际绘制到镜片上的画面（576 × 288 px）。示例中学习的语言是韩语。</p>
+    </div>
+  </section>
+
+  <section id="phone-zh">
+    <div class="wrap">
+      <h2>在手机上</h2>
+      <p class="sub">手机用来选择和回顾。对话时，它待在口袋里。</p>
+      <div class="phones">
+        <figure><img src="./assets/phone-home.jpg" width="780" height="1688" alt="手机界面：首页的今日平衡 — 听力、今日口语课程、AI 自由对话"><figcaption>首页 — 听力、口语、自由对话的今日平衡。</figcaption></figure>
+        <figure><img src="./assets/phone-practice.jpg" width="780" height="1688" alt="手机界面：口语练习的课程进度和场景课程表"><figcaption>口语练习 — 按场景编排的课程，一步一步来。</figcaption></figure>
+        <figure><img src="./assets/phone-languages.jpg" width="780" height="1688" alt="手机界面：你说哪种语言，正在学哪种语言？"><figcaption>选择语言 — 你说的语言和要学的语言。</figcaption></figure>
+        <figure><img src="./assets/phone-voice.jpg" width="780" height="1688" alt="手机界面：我的声音 — 朗读 6 秒注册声音"><figcaption>我的声音 — 朗读 6 秒，分辨你和对方的声音。</figcaption></figure>
+      </div>
+      <p class="note">手机界面为英文。</p>
+    </div>
+  </section>
+
+  <section id="langs-zh">
+    <div class="wrap">
+      <h2>语言与要求</h2>
+      <p class="sub">用中文、韩语或日语使用就学英语；用英语使用就在中文、韩语、日语里选一个学。</p>
+      <div class="chips" aria-label="应用语言">
+        <span class="chip">한국어</span><span class="chip">English</span><span class="chip">日本語<small>测试版</small></span><span class="chip">中文（简体）<small>测试版</small></span>
+      </div>
+      <p class="req"><b>需要</b> — Even Realities G2 · Even 应用 2.2.6 或更高 · 网络连接。日语和中文尚未经母语者审校，标注为测试版。</p>
+    </div>
+  </section>
+
+  <section id="privacy-zh">
+    <div class="wrap">
+      <h2>关于你的数据，简短版</h2>
+      <p class="sub">本页面无需登录即可阅读。这里是 Echo 如何处理你的数据的摘要 — 完整政策点一下就能看到。</p>
+      <ul class="plist">
+        <li><b>不保存录音文件。</b> 只保留识别后的文字。识别过程中音频会发送给语音识别服务商，政策里逐一列出了这些服务商。</li>
+        <li><b>用来识别你声音的数据只保存在这台设备上。</b> 可随时在 我 → 我的声音 中删除。</li>
+        <li><b>对话文字和学习记录会绑定到你的账户保存</b>，方便回顾。可在 我 → 数据 中全部删除。</li>
+        <li><b>实战对话会识别周围人的说话。</b> 开启前请告知对方并取得同意。</li>
+        <li><b>Google 登录是可选的。</b> 它能让你的记录在换设备后继续使用。Echo 从 Google 只获取电子邮箱地址，仅用于识别账户，不会读取你 Google 账户的其他信息。</li>
+      </ul>
+      <a class="btn s" href="https://jk06095-lang.github.io/echo-legal/zh.html">阅读完整隐私政策 →</a>
+    </div>
+  </section>
+
+  <section id="contact-zh">
+    <div class="wrap">
+      <h2>联系</h2>
+      <p class="sub">ECHO 由韩国的独立开发者制作。</p>
+      <div class="contact">
+        <div><b>邮箱</b><a href="mailto:jk06095@gmail.com">jk06095@gmail.com</a></div>
+        <div><b>GitHub</b><a href="https://github.com/jk06095-lang">github.com/jk06095-lang</a></div>
+        <div><b>隐私政策</b><a href="https://jk06095-lang.github.io/echo-legal/">jk06095-lang.github.io/echo-legal</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="links"><a href="https://jk06095-lang.github.io/echo-legal/">隐私政策</a><a href="mailto:jk06095@gmail.com">联系</a><a href="#top">回到顶部</a></div>
+      <p>© 2026 ECHO · jk06095. Even Realities 和 G2 是其各自所有者的商标。ECHO 是独立开发的第三方应用，与 Even Realities 没有关联或授权关系。</p>
+    </div>
+  </footer>
+</div>
+</main>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btns = document.querySelectorAll('.langs button');
+    function sync() {
+      var cur = root.getAttribute('data-lang');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-set') === cur ? 'true' : 'false');
+      }
+    }
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        var l = this.getAttribute('data-set');
+        root.setAttribute('data-lang', l);
+        root.lang = l === 'zh' ? 'zh-Hans' : l;
+        try { localStorage.setItem('echo.lang', l); } catch (e) {}
+        try { history.replaceState(null, '', l === 'en' ? location.pathname : '?lang=' + l); } catch (e) {}
+        sync();
+      });
+    }
+    sync();
+  })();
+</script>
+</body>
+</html>
