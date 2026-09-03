@@ -105,7 +105,12 @@
   .btn.s { color: var(--text); background: rgba(255, 255, 255, 0.06); }
   .btn:hover { filter: brightness(1.06); }
 
-  .glasses { display: block; width: 300px; max-width: 70%; margin: 0 auto 18px; opacity: 0.55; }
+  .glasses { display: block; width: 320px; max-width: 78%; margin: 0 auto 16px; }
+  .glasses .glow { fill: var(--lens); opacity: 0.2; filter: blur(10px); }
+  .glasses .pane { fill: rgba(255, 255, 255, 0.045); }
+  .glasses .frame { fill: none; stroke: rgba(255, 255, 255, 0.62); stroke-width: 2.2; }
+  .glasses .pads { fill: none; stroke: rgba(255, 255, 255, 0.32); stroke-width: 1.8; }
+  @media (prefers-reduced-motion: reduce) { .glasses .glow { filter: none; opacity: 0.12; } }
   .lens { background: #0a0c0a; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 22px 26px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06); color: var(--lens); }
   .lens .row { display: grid; grid-template-columns: 6em 1fr; gap: 14px; align-items: baseline; padding: 9px 0; }
   .lens .row + .row { border-top: 1px solid rgba(70, 230, 70, 0.08); }
@@ -218,9 +223,18 @@
         </div>
       </div>
       <div>
-        <svg class="glasses" viewBox="0 0 300 70" aria-hidden="true" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round">
-          <rect x="18" y="14" width="112" height="46" rx="16"/><rect x="170" y="14" width="112" height="46" rx="16"/>
-          <path d="M130 30 q20 -14 40 0"/><path d="M18 26 l-12 -6"/><path d="M282 26 l12 -6"/>
+        <svg class="glasses" viewBox="0 10 320 80" aria-hidden="true">
+          <g class="glow"><ellipse cx="93" cy="50" rx="24" ry="10"/><ellipse cx="227" cy="50" rx="24" ry="10"/></g>
+          <g class="pane"><rect x="48" y="30" width="90" height="42" rx="16"/><rect x="182" y="30" width="90" height="42" rx="16"/></g>
+          <g class="frame" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="48" y="30" width="90" height="42" rx="16"/><rect x="182" y="30" width="90" height="42" rx="16"/>
+            <path d="M138 41c10-8 34-8 44 0"/>
+            <path d="M48 39 30 34"/><path d="M30 34c-8-1-16 2-22 10"/>
+            <path d="M272 39 290 34"/><path d="M290 34c8-1 16 2 22 10"/>
+          </g>
+          <g class="pads" stroke-linecap="round">
+            <path d="M151 38c-3 7-2 12 2 15"/><path d="M169 38c3 7 2 12-2 15"/>
+          </g>
         </svg>
         <div class="lens" role="img" aria-label="Example of what appears on the lens: what they said, a line to try, and what you said">
           <div class="row"><span class="k">Listening</span><span class="v">어서 오세요, 주문 도와드릴까요?<small>Welcome — what can I get you?</small></span></div>
@@ -357,9 +371,18 @@
         </div>
       </div>
       <div>
-        <svg class="glasses" viewBox="0 0 300 70" aria-hidden="true" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round">
-          <rect x="18" y="14" width="112" height="46" rx="16"/><rect x="170" y="14" width="112" height="46" rx="16"/>
-          <path d="M130 30 q20 -14 40 0"/><path d="M18 26 l-12 -6"/><path d="M282 26 l12 -6"/>
+        <svg class="glasses" viewBox="0 10 320 80" aria-hidden="true">
+          <g class="glow"><ellipse cx="93" cy="50" rx="24" ry="10"/><ellipse cx="227" cy="50" rx="24" ry="10"/></g>
+          <g class="pane"><rect x="48" y="30" width="90" height="42" rx="16"/><rect x="182" y="30" width="90" height="42" rx="16"/></g>
+          <g class="frame" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="48" y="30" width="90" height="42" rx="16"/><rect x="182" y="30" width="90" height="42" rx="16"/>
+            <path d="M138 41c10-8 34-8 44 0"/>
+            <path d="M48 39 30 34"/><path d="M30 34c-8-1-16 2-22 10"/>
+            <path d="M272 39 290 34"/><path d="M290 34c8-1 16 2 22 10"/>
+          </g>
+          <g class="pads" stroke-linecap="round">
+            <path d="M151 38c-3 7-2 12 2 15"/><path d="M169 38c3 7 2 12-2 15"/>
+          </g>
         </svg>
         <div class="lens" role="img" aria-label="렌즈에 뜨는 화면 예시: 상대가 한 말, 해볼 만한 한 마디, 내가 한 말">
           <div class="row"><span class="k">Listening</span><span class="v">Hi! What can I get for you?<small>어서 오세요, 주문 도와드릴까요?</small></span></div>
@@ -497,9 +520,18 @@
         </div>
       </div>
       <div>
-        <svg class="glasses" viewBox="0 0 300 70" aria-hidden="true" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round">
-          <rect x="18" y="14" width="112" height="46" rx="16"/><rect x="170" y="14" width="112" height="46" rx="16"/>
-          <path d="M130 30 q20 -14 40 0"/><path d="M18 26 l-12 -6"/><path d="M282 26 l12 -6"/>
+        <svg class="glasses" viewBox="0 10 320 80" aria-hidden="true">
+          <g class="glow"><ellipse cx="93" cy="50" rx="24" ry="10"/><ellipse cx="227" cy="50" rx="24" ry="10"/></g>
+          <g class="pane"><rect x="48" y="30" width="90" height="42" rx="16"/><rect x="182" y="30" width="90" height="42" rx="16"/></g>
+          <g class="frame" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="48" y="30" width="90" height="42" rx="16"/><rect x="182" y="30" width="90" height="42" rx="16"/>
+            <path d="M138 41c10-8 34-8 44 0"/>
+            <path d="M48 39 30 34"/><path d="M30 34c-8-1-16 2-22 10"/>
+            <path d="M272 39 290 34"/><path d="M290 34c8-1 16 2 22 10"/>
+          </g>
+          <g class="pads" stroke-linecap="round">
+            <path d="M151 38c-3 7-2 12 2 15"/><path d="M169 38c3 7 2 12-2 15"/>
+          </g>
         </svg>
         <div class="lens" role="img" aria-label="レンズに映る画面の例：相手の言葉、試せるひと言、自分が言った言葉">
           <div class="row"><span class="k">Listening</span><span class="v">Hi! What can I get for you?<small>いらっしゃいませ、ご注文は？</small></span></div>
@@ -637,9 +669,18 @@
         </div>
       </div>
       <div>
-        <svg class="glasses" viewBox="0 0 300 70" aria-hidden="true" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round">
-          <rect x="18" y="14" width="112" height="46" rx="16"/><rect x="170" y="14" width="112" height="46" rx="16"/>
-          <path d="M130 30 q20 -14 40 0"/><path d="M18 26 l-12 -6"/><path d="M282 26 l12 -6"/>
+        <svg class="glasses" viewBox="0 10 320 80" aria-hidden="true">
+          <g class="glow"><ellipse cx="93" cy="50" rx="24" ry="10"/><ellipse cx="227" cy="50" rx="24" ry="10"/></g>
+          <g class="pane"><rect x="48" y="30" width="90" height="42" rx="16"/><rect x="182" y="30" width="90" height="42" rx="16"/></g>
+          <g class="frame" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="48" y="30" width="90" height="42" rx="16"/><rect x="182" y="30" width="90" height="42" rx="16"/>
+            <path d="M138 41c10-8 34-8 44 0"/>
+            <path d="M48 39 30 34"/><path d="M30 34c-8-1-16 2-22 10"/>
+            <path d="M272 39 290 34"/><path d="M290 34c8-1 16 2 22 10"/>
+          </g>
+          <g class="pads" stroke-linecap="round">
+            <path d="M151 38c-3 7-2 12 2 15"/><path d="M169 38c3 7 2 12-2 15"/>
+          </g>
         </svg>
         <div class="lens" role="img" aria-label="镜片上显示的示例：对方说的、可以试着说的、你说出的">
           <div class="row"><span class="k">Listening</span><span class="v">Hi! What can I get for you?<small>欢迎光临，想点什么？</small></span></div>
