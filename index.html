@@ -8,7 +8,7 @@
      Google Search Console — 사이트 소유권 확인 (URL 접두어 속성)
        속성:  https://jk06095-lang.github.io/
        방법:  "HTML 태그" 를 고르면 나오는 메타태그를 아래 줄에 그대로 붙여넣는다.
-              예) <meta name="google-site-verification" content="…">
+              (스크립트로도 된다: node docs/homepage/apply-verification.mjs --meta <값>)
        ⚠ 이 페이지는 **즉시 리다이렉트하지 않는다.** 예전에는 /echo/ 로 meta refresh 를
          걸어 뒀는데, 소유권 확인기가 이 문서의 <head> 를 읽어야 하므로 변수를 없앴다.
        ⚠ 더 안전한 방법은 "HTML 파일 업로드" 다 — google<해시>.html 를 이 폴더(리포 루트)에
