@@ -3,23 +3,74 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Google Search Console 소유권 확인(도메인 루트 속성 https://jk06095-lang.github.io/):
-     "HTML 태그" 방식의 메타태그를 아래 줄에 넣는다. 예) <meta name="google-site-verification" content="…"> -->
-<meta http-equiv="refresh" content="0; url=./echo/">
-<link rel="canonical" href="https://jk06095-lang.github.io/echo/">
-<title>ECHO</title>
+
+<!-- ─────────────────────────────────────────────────────────────────────────
+     Google Search Console — 사이트 소유권 확인 (URL 접두어 속성)
+       속성:  https://jk06095-lang.github.io/
+       방법:  "HTML 태그" 를 고르면 나오는 메타태그를 아래 줄에 그대로 붙여넣는다.
+              예) <meta name="google-site-verification" content="…">
+       ⚠ 이 페이지는 **즉시 리다이렉트하지 않는다.** 예전에는 /echo/ 로 meta refresh 를
+         걸어 뒀는데, 소유권 확인기가 이 문서의 <head> 를 읽어야 하므로 변수를 없앴다.
+       ⚠ 더 안전한 방법은 "HTML 파일 업로드" 다 — google<해시>.html 를 이 폴더(리포 루트)에
+         두면 https://jk06095-lang.github.io/google<해시>.html 로 그대로 서빙된다.
+     ───────────────────────────────────────────────────────────────────────── -->
+
+<title>jk06095-lang</title>
+<meta name="description" content="Projects by jk06095-lang. ECHO is a language-practice app for Even Realities G2 smart glasses.">
+<meta name="theme-color" content="#101016">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://jk06095-lang.github.io/">
+<link rel="icon" href="/echo/assets/favicon.svg" type="image/svg+xml">
 <style>
-  html, body { margin: 0; background: #101016; color: #ececee; font: 16px/1.6 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-  main { min-height: 100vh; display: grid; place-items: center; text-align: center; padding: 24px; }
-  a { color: #f6ec81; }
-  .mark { font-weight: 900; letter-spacing: .26em; font-size: 28px; margin-bottom: 8px; }
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #101016; color: #ececee;
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif; }
+  body { background-image: radial-gradient(760px 460px at 82% -12%, rgba(246,236,129,.07), transparent 60%); }
+  main { min-height: 100vh; display: grid; place-items: center; padding: 32px 24px; }
+  .box { width: 100%; max-width: 560px; }
+  .mark { font-weight: 900; letter-spacing: .22em; font-size: 15px; color: #a3a3ad; margin: 0 0 28px; }
+  h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.2; margin: 0 0 10px; letter-spacing: -.01em; }
+  h1 span { color: #f6ec81; }
+  p.lead { color: #a3a3ad; margin: 0 0 30px; }
+  a.card { display: block; text-decoration: none; color: inherit;
+    border: 1px solid rgba(255,255,255,.1); background: rgba(38,40,52,.4); border-radius: 16px;
+    padding: 22px 24px; margin-bottom: 12px;
+    box-shadow: 0 10px 30px rgba(8,8,14,.25), inset 0 1px 0 rgba(255,255,255,.06); }
+  a.card:hover { border-color: rgba(246,236,129,.45); }
+  a.card h2 { margin: 0 0 6px; font-size: 19px; }
+  a.card p { margin: 0; color: #a3a3ad; font-size: 15px; }
+  a.card .go { color: #f6ec81; font-size: 14px; margin-top: 12px; display: block; }
+  footer { margin-top: 26px; font-size: 13px; color: #7c7c86; }
+  footer a { color: #a3a3ad; }
 </style>
 </head>
 <body>
 <main>
-  <div>
-    <div class="mark">ECHO</div>
-    <p>Redirecting to <a href="./echo/">jk06095-lang.github.io/echo/</a> …</p>
+  <div class="box">
+    <p class="mark">JK06095-LANG</p>
+    <h1>ECH<span>O</span></h1>
+    <p class="lead">Even Realities G2 스마트 안경용 외국어 회화 연습 앱.<br>
+      A language-practice app for Even Realities G2 smart glasses.</p>
+
+    <a class="card" href="/echo/">
+      <h2>ECHO</h2>
+      <p>대화 중 상대의 말을 안경 자막으로 보여주고, 지금 쓸 수 있는 표현을 함께 띄웁니다.
+        Live subtitles and a line you can say right now, on the glasses.</p>
+      <span class="go">앱 소개 보기 / Learn more →</span>
+    </a>
+
+    <a class="card" href="https://jk06095-lang.github.io/echo-legal/">
+      <h2>Privacy Policy</h2>
+      <p>ECHO 개인정보처리방침 — 한국어 · English · 日本語 · 中文（简体）</p>
+      <span class="go">방침 읽기 / Read →</span>
+    </a>
+
+    <footer>
+      문의 / Contact <a href="mailto:jk06095@gmail.com">jk06095@gmail.com</a> ·
+      <a href="https://github.com/jk06095-lang">github.com/jk06095-lang</a>
+    </footer>
   </div>
 </main>
 </body>
