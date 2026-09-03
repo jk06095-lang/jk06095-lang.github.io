@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECHO Privacy Policy</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 44em; margin: 0 auto; padding: 32px 20px 64px;
+  font: 16px/1.75 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+  color: #1c1d24; background: #fff; word-break: keep-all; }
+@media (prefers-color-scheme: dark) { body { color: #ececee; background: #101016; } .updated, .note, footer { color: #a3a3ad; } }
+h1 { font-size: 24px; margin: 0 0 6px; }
+h2 { font-size: 17px; margin: 34px 0 8px; }
+.updated { color: #6e6e73; font-size: 13px; margin: 0 0 8px; }
+.note { color: #6e6e73; font-size: 13px; border-left: 3px solid currentColor; padding-left: 12px; margin: 18px 0; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 14px; }
+th, td { border: 1px solid rgba(128,128,140,.4); padding: 7px 9px; text-align: left; vertical-align: top; }
+th { font-weight: 600; }
+nav { font-size: 14px; margin-bottom: 22px; }
+nav a, nav b { margin-right: 12px; }
+nav .home { float: right; margin-right: 0; }
+footer { margin-top: 40px; font-size: 13px; color: #6e6e73; }
+</style>
+</head>
+<body>
+<nav><a href="./ko.html">한국어</a><b>English</b><a href="./zh.html">中文</a><a href="./ja.html">日本語</a><a class="home" href="https://harico.cloud/echo/">ECHO home ↗</a></nav>
+<h1>ECHO Privacy Policy</h1>
+<p class="updated">Last updated 2026-09-03</p>
+<p class="note">This English text is a translation of the Korean original, provided for your convenience. If the two differ, the Korean text governs.</p>
+
+
+<h2>The short version</h2>
+<p>Echo recognizes your conversations and keeps them <b>as text</b> so you can learn from them.
+      <b>Recordings are not stored on the server.</b>
+      The data used to recognize your voice stays <b>on this device only</b>, and you can delete it at any time.</p>
+
+<h2>⚠ Legal notice about recording conversations</h2>
+<p>Live Talk recognizes <b>the speech of people around you</b>.
+      The Republic of Korea's Protection of Communications Secrets Act <b>prohibits secretly recording or listening in on a conversation you are not a party to</b>.
+      Before you turn this feature on, <b>you must tell the other person and get their consent.</b>
+      Any legal liability arising from using it without consent is yours.</p>
+<p>Echo <b>does not save the other person's voice as a file.</b> Only the recognized text remains.
+      During recognition, however, the audio is <b>sent</b> to the companies in the table below.</p>
+
+<h2>What we collect</h2>
+<table><thead><tr><th>Item</th><th>Where it stays</th></tr></thead><tbody><tr><td>Conversation text · scores · learning records</td><td>Server (tied to your account)</td></tr><tr><td>Vocab · expression cards · persona</td><td>Server (tied to your account)</td></tr><tr><td>Voice pitch range (numbers)</td><td>Server (tied to your account)</td></tr><tr><td><b>Original reading recordings</b></td><td><b>This device only</b></td></tr><tr><td><b>Voice feature values (voiceprint)</b></td><td><b>This device only</b></td></tr><tr><td>Settings · progress · records waiting to upload</td><td>This device only</td></tr><tr><td>Email address · social account info (if you linked an account — when you sign in with Google or another provider, Echo receives that account's email address and account ID, plus the profile name and picture URL. The email and account ID are used only to identify your account and restore your records on a new device; the profile name and picture are never read by the app and stay only in the sign-in service (Supabase). Nothing received from a social account is given to anyone outside the companies in the table below, and none of it is used for advertising or to train AI models. You can disconnect at any time under 'Third-party apps &amp; services' in your Google Account)</td><td>Server (Supabase)</td></tr><tr><td>AI usage timestamps (no content — only which provider was accessed and when; kept 25 hours to enforce the daily usage cap, then deleted)</td><td>Server (tied to your account)</td></tr></tbody></table>
+<p>We do not collect your phone number, address, or payment information. Your name is kept only in two cases — when you tell it to the persona interview (server, tied to your account, included in AI conversation prompts) and when you link a social account (see the table above). We do not use advertising identifiers.</p>
+
+<h2>Processors and transfers abroad</h2>
+<p>The companies below process data on Echo's behalf, and Echo gives personal data to no one else.
+      Speech recognition and AI responses are processed on the servers of companies outside Korea — sent in real time over an encrypted connection
+      the moment you use a conversation or practice feature. After processing, each company keeps or deletes the data under its own policy,
+      and Echo neither views nor controls what is stored on those servers.
+      If you do not agree to the transfer abroad, you can decline on the first-run consent screen; Echo's speech recognition and AI conversation are then unavailable.</p>
+<p><b>There are two routes.</b> Audio goes from the glasses to the recognition company <b>directly</b>.
+      Text requests (translation · expression suggestions · building situations · speech synthesis) go
+      <b>through Echo's server</b> — so that the keys are not kept in the app. It only passes through; <b>the content is not stored.</b>
+      <b>How we protect it.</b> All transfers are encrypted with TLS. Server records are protected by per-account access control (row-level security)
+      so that only your account can read them, and vendor API keys are kept on the server, never in the app. Original recordings and your voiceprint never leave your device.</p>
+<table><thead><tr><th>Company</th><th>Country</th><th>What goes there</th></tr></thead><tbody><tr><td>Supabase</td><td>Republic of Korea (Seoul) — servers of Supabase, Inc. (a US company)</td><td>Conversation text · learning records · Vocab · persona · account identifier · email address · social account info · sign-in records · relaying AI requests (not stored)</td></tr><tr><td>Soniox</td><td>United States</td><td>⚠ Raw microphone audio (includes other people's voices)</td></tr><tr><td>Google (Gemini)</td><td>United States</td><td>⚠ Raw microphone audio (AI Free Talk) · conversation text · persona</td></tr><tr><td>OpenRouter</td><td>United States</td><td>Conversation text (not audio)</td></tr><tr><td>Deepgram</td><td>United States</td><td>Text of the sentences to be read aloud (not audio)</td></tr></tbody></table>
+<p><b>No conversation content goes</b> to the two places below — when program files are downloaded,
+      only connection records (IP, device information) remain: Hugging Face(Downloading the voice recognition model) · jsDelivr(Downloading the audio processing library).</p>
+
+<h2>How long we keep it</h2>
+<p>We keep your learning records and account information (email · social links) until you delete them in the app or ask us to delete them at the contact below.
+      Because the point of learning is comparing against past records, we do not set a period and delete them automatically.
+      You can delete them whenever you want in the ways below; requests by email are handled within 10 days.</p>
+
+<h2>How to delete</h2>
+<table><thead><tr><th>What</th><th>Where</th></tr></thead><tbody><tr><td>Voice data (original recordings · voiceprint · pitch range)</td><td>Me → My Voice → Your data</td></tr><tr><td>All learning records (conversations · Vocab · persona)</td><td>Me → Data → Delete all learning history</td></tr><tr><td>One word at a time</td><td>Vocab → that entry → Remove from list</td></tr><tr><td>One persona fact at a time</td><td>Me → Persona → that fact → Delete</td></tr><tr><td>Account · email address · social links · every server record</td><td>Email jk06095@gmail.com (handled within 10 days, with a reply)</td></tr></tbody></table>
+<p>Data that lives only on this device (original recordings · voiceprint) is <b>deleted along with the app when you uninstall it.</b></p>
+
+<h2>Open source we use</h2>
+<p>We use the <b>WeSpeaker</b> model (<code>onnx-community/wespeaker-voxceleb-resnet34-LM</code>)
+      to tell voices apart — CC BY 4.0.
+      We use <b>ONNX Runtime Web</b> (MIT) and <b>Transformers.js</b> (Apache-2.0) for audio processing.</p>
+
+<h2>Contact</h2>
+<p>Data controller and privacy officer: the developer (independent developer, GitHub jk06095-lang) — <b>jk06095@gmail.com</b>. Send requests to access, correct, delete, or suspend processing, or to withdraw consent, to this address; we handle them within 10 days and reply. You may also contact the Korean Personal Information Infringement Report Center (privacy.kisa.or.kr, dial 118). It is also on the web: <b>https://harico.cloud/privacy/</b></p>
+
+<footer><p>ECHO homepage: <a href="https://harico.cloud/echo/">https://harico.cloud/echo/</a> · Contact: jk06095@gmail.com</p></footer>
+<!-- generated from src/i18n/legal/en.ts by `npm run export:privacy` — do not hand-edit -->
+</body>
+</html>

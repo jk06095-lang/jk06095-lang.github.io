@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECHO プライバシーポリシー</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 44em; margin: 0 auto; padding: 32px 20px 64px;
+  font: 16px/1.75 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+  color: #1c1d24; background: #fff; word-break: keep-all; }
+@media (prefers-color-scheme: dark) { body { color: #ececee; background: #101016; } .updated, .note, footer { color: #a3a3ad; } }
+h1 { font-size: 24px; margin: 0 0 6px; }
+h2 { font-size: 17px; margin: 34px 0 8px; }
+.updated { color: #6e6e73; font-size: 13px; margin: 0 0 8px; }
+.note { color: #6e6e73; font-size: 13px; border-left: 3px solid currentColor; padding-left: 12px; margin: 18px 0; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 14px; }
+th, td { border: 1px solid rgba(128,128,140,.4); padding: 7px 9px; text-align: left; vertical-align: top; }
+th { font-weight: 600; }
+nav { font-size: 14px; margin-bottom: 22px; }
+nav a, nav b { margin-right: 12px; }
+nav .home { float: right; margin-right: 0; }
+footer { margin-top: 40px; font-size: 13px; color: #6e6e73; }
+</style>
+</head>
+<body>
+<nav><a href="./ko.html">한국어</a><a href="./en.html">English</a><a href="./zh.html">中文</a><b>日本語</b><a class="home" href="https://harico.cloud/echo/">ECHO ホーム ↗</a></nav>
+<h1>ECHO プライバシーポリシー</h1>
+<p class="updated">最終更新 2026-09-03</p>
+<p class="note">本文書は韓国語原文の翻訳であり、内容に相違がある場合は韓国語原文が優先します。</p>
+
+
+<h2>一行まとめ</h2>
+<p>Echoは学習のために会話を認識し、<b>テキストとして</b>残します。
+      <b>録音ファイルはサーバーに保存しません。</b>
+      声を識別するためのデータは<b>この端末の中だけ</b>にあり、いつでも削除できます。</p>
+
+<h2>⚠ 会話の録音に関する法的告知</h2>
+<p>実戦会話機能は<b>周囲の人の話し声</b>を認識します。
+      大韓民国の通信秘密保護法は、<b>会話の当事者でない人の会話を無断で録音・聴取することを禁止</b>しています。
+      この機能をオンにする前に、<b>相手に知らせて同意を得てください。</b>
+      同意なく使用して生じる法的責任は利用者本人が負います。</p>
+<p>Echoは相手の音声を<b>ファイルとして保存しません。</b>認識されたテキストだけが残ります。
+      ただし認識の過程で、音声が下の表の事業者へ<b>送信</b>されます。</p>
+
+<h2>収集するもの</h2>
+<table><thead><tr><th>項目</th><th>どこに残るか</th></tr></thead><tbody><tr><td>会話テキスト・スコア・学習記録</td><td>サーバー（アカウントに紐づく）</td></tr><tr><td>単語帳・表現カード・ペルソナ</td><td>サーバー（アカウントに紐づく）</td></tr><tr><td>声の音域（数値）</td><td>サーバー（アカウントに紐づく）</td></tr><tr><td><b>読み上げ録音の原本</b></td><td><b>この端末のみ</b></td></tr><tr><td><b>声の特徴量（声紋）</b></td><td><b>この端末のみ</b></td></tr><tr><td>設定・進捗・送信待ちの記録</td><td>この端末のみ</td></tr><tr><td>メールアドレス・ソーシャルアカウント情報（アカウントを連携した場合 — Google などでログインすると、そのアカウントのメールアドレス・アカウント ID と、プロフィール名・写真の URL を受け取ります。メールアドレスとアカウント ID はアカウントの識別と端末間の記録復元にのみ使い、プロフィール名・写真はアプリが読み取らず、ログインサービス（Supabase）にのみ残ります。ソーシャルアカウントから受け取った情報は下の表の事業者以外の誰にも渡さず、広告や AI モデルの学習にも使いません。連携は Google アカウントの「サードパーティ製アプリとサービス」設定からいつでも解除できます）</td><td>サーバー（Supabase）</td></tr><tr><td>AI利用時刻の記録（内容なし — どの事業者の接続権をいつ受け取ったかだけ。1日の利用上限を数えるため25時間後に削除）</td><td>サーバー（アカウントに紐づく）</td></tr></tbody></table>
+<p>電話番号・住所・決済情報は収集しません。氏名が残るのは二つの場合だけです — ペルソナのインタビューで自分から話した場合（サーバー・アカウントに紐づき、AI 会話のプロンプトに含まれます）と、ソーシャルアカウントを連携した場合（上の表を参照）。広告識別子は使用しません。</p>
+
+<h2>処理の委託と国外移転</h2>
+<p>下の事業者は Echo が処理を委託している先で、Echo はこれら以外の誰にも個人情報を渡しません。
+      音声認識とAIの応答は海外事業者のサーバーで処理されます — 会話や練習の機能を使った瞬間に、暗号化された通信でリアルタイムに送られます。
+      処理後は各事業者のポリシーに従って保管・削除され、Echoはそのサーバーに保存された内容を閲覧・統制しません。
+      国外移転に同意しない場合は初回の同意画面で拒否できます。その場合、Echo の音声認識と AI 会話は利用できません。</p>
+<p><b>経路は二つあります。</b>音声はメガネから認識事業者へ<b>直接</b>送られます。
+      テキストによるリクエスト（翻訳・表現のおすすめ・場面の作成・音声合成）は<b>Echoのサーバーを経由して</b>
+      送られます — 鍵をアプリに置かないためです。経由するだけで<b>内容は保存しません。</b>
+      <b>守り方。</b>すべての送信は TLS で暗号化されます。サーバーの記録はアカウントごとのアクセス制御（行レベルセキュリティ）で本人のアカウントだけが読め、
+      外部事業者の API キーはアプリではなくサーバーにのみ置きます。録音原本と声紋はサーバーに送られません。</p>
+<table><thead><tr><th>事業者</th><th>国</th><th>何が送られるか</th></tr></thead><tbody><tr><td>Supabase</td><td>大韓民国（ソウル）— Supabase, Inc.（米国法人）のサーバー</td><td>会話テキスト・学習記録・単語帳・ペルソナ・アカウント識別子・メールアドレス・ソーシャルアカウント情報・ログイン記録・AIリクエストの中継（保存なし）</td></tr><tr><td>Soniox</td><td>米国</td><td>⚠ マイクの原音声（相手の声を含む）</td></tr><tr><td>Google (Gemini)</td><td>米国</td><td>⚠ マイクの原音声（フリートーク）・会話テキスト・ペルソナ</td></tr><tr><td>OpenRouter</td><td>米国</td><td>会話テキスト（音声ではありません）</td></tr><tr><td>Deepgram</td><td>米国</td><td>読み上げる文のテキスト（音声ではありません）</td></tr></tbody></table>
+<p>次の二か所には<b>会話の内容は送られません</b> — プログラムファイルをダウンロードする際の
+      接続記録（IP・端末情報）だけが残ります: Hugging Face(声の認識モデルのダウンロード) · jsDelivr(音声処理ライブラリのダウンロード)。</p>
+
+<h2>どのくらい保管するか</h2>
+<p>学習記録とアカウント情報（メールアドレス・ソーシャル連携）は、利用者がアプリで削除するか、下の連絡先に削除を請求するまで保管します。
+      過去の記録と比べることが学習の目的であるため、期間を定めて自動的に削除することはしません。
+      ご希望のときは、下の方法でいつでも削除できます。メールでのご請求は10日以内に処理します。</p>
+
+<h2>削除する方法</h2>
+<table><thead><tr><th>何を</th><th>どこで</th></tr></thead><tbody><tr><td>声のデータ（録音原本・声紋・音域）</td><td>自分 → 私の声 → データ管理</td></tr><tr><td>学習記録すべて（会話・単語帳・ペルソナ）</td><td>自分 → データ → すべての学習記録を削除</td></tr><tr><td>単語を一つずつ</td><td>単語帳 → 該当の項目 → リストから削除</td></tr><tr><td>ペルソナのファクトを一つずつ</td><td>自分 → ペルソナ → 該当のファクト → 削除</td></tr><tr><td>アカウント・メールアドレス・ソーシャル連携・サーバー上の全記録</td><td>jk06095@gmail.com に請求（10日以内に処理して返信）</td></tr></tbody></table>
+<p>端末の中だけにあるデータ（録音原本・声紋）は、<b>アプリを削除すると一緒に消えます。</b></p>
+
+<h2>使用しているオープンソース</h2>
+<p>声の識別に<b>WeSpeaker</b>（<code>onnx-community/wespeaker-voxceleb-resnet34-LM</code>）
+      モデルを使用しています — CC BY 4.0。
+      音声処理に<b>ONNX Runtime Web</b>（MIT）と<b>Transformers.js</b>（Apache-2.0）を使用しています。</p>
+
+<h2>お問い合わせ</h2>
+<p>個人情報の処理者・保護責任者: 開発者本人（個人開発、GitHub jk06095-lang）— <b>jk06095@gmail.com</b>。閲覧・訂正・削除・処理停止のご請求と同意の撤回はこの宛先にお送りください。10日以内に処理してお知らせします。権利の侵害については韓国の個人情報侵害申告センター（privacy.kisa.or.kr・局番なし 118）に相談・申告できます。ウェブでも読めます: <b>https://harico.cloud/privacy/</b></p>
+
+<footer><p>ECHO ホームページ: <a href="https://harico.cloud/echo/">https://harico.cloud/echo/</a> · お問い合わせ: jk06095@gmail.com</p></footer>
+<!-- generated from src/i18n/legal/ja.ts by `npm run export:privacy` — do not hand-edit -->
+</body>
+</html>
